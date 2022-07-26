@@ -1,5 +1,5 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -12,16 +12,7 @@ module.exports = {
     filename: 'webpack-demo.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devServer: {
-    open: true,
-    // client: {
-    //   logging: 'none',
-    //   progress: true,
-    // },
-    port: 7777,
-    // stats: 'errors-only',
-  },
-  module: {
+    module: {
     rules: [
       {
         test: /\.sсss$/i,
@@ -30,10 +21,21 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: {
+          loader: 'babel-loader',
+        },
       }
     ],
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    open: true,
+    port: 7777,
+  },
+
   plugins: [
     new HtmlWebpackPlugin({ template: 'src/index.html' }),
     new MiniCssExtractPlugin({ filename: 'style.css' }),
