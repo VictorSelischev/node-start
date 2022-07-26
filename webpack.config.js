@@ -5,14 +5,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   // mode: 'production',
-  // mode: 'development',
+  mode: 'development',
+  stats: 'errors-only',
   entry: './src/index.js',
   output: {
     filename: 'webpack-demo.js',
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    static: './dist',
     open: true,
     // client: {
     //   logging: 'none',
